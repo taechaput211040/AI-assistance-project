@@ -88,6 +88,7 @@ function runSingle() {
   if (baseErrors.value.length) { singleErr.value = baseErrors.value[0]; return }
   const paid = Math.floor(Number(single.pulls))
   if (!(paid > 0)) { singleErr.value = 'จำนวนครั้งสุ่มต้องมากกว่า 0'; return }
+  if (paid > 100000) { singleErr.value = 'จำกัดสูงสุด 100,000 ครั้งต่อรอบ (กัน browser ค้าง)'; return }
   if (Number(single.price) < 0) { singleErr.value = 'ราคาต่อครั้งต้องไม่ติดลบ'; return }
   const freeR = freeFromPaid(paid)
   const total = paid + freeR
@@ -134,6 +135,7 @@ function runPOV() {
   const freeR = freeFromPaid(paid)
   const total = paid + freeR
   if (!(total > 0)) { povErr.value = 'งบไม่พอสุ่มแม้แต่ครั้งเดียว'; return }
+  if (total > 2000000) { povErr.value = `จำนวน rolls ต่อรอบสูงเกินไป (${total.toLocaleString()}) — ลดงบหรือเพิ่มราคาต่อ roll`; return }
   let capped = false
   if (total * sims > 20000000) { sims = Math.max(1, Math.floor(20000000 / total)); capped = true }
   const tItem = pov.target ? items.value.find(i => i.name === pov.target) : null
