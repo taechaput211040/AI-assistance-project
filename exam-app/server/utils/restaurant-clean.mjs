@@ -96,7 +96,7 @@ function reasonOf(r) {
   return bits.join(' · ')
 }
 
-export function cleanAndScore(rawPlaces, reviewsById = {}, fsqList = []) {
+export function cleanAndScore(rawPlaces, reviewsById = {}, fsqList = [], photosById = {}) {
   const byId = new Map()
   for (const { area, place } of rawPlaces) {
     if (!place || !place.id) continue
@@ -138,6 +138,7 @@ export function cleanAndScore(rawPlaces, reviewsById = {}, fsqList = []) {
       hours: place.regularOpeningHours?.weekdayDescriptions || [],
       open_now: place.currentOpeningHours?.openNow ?? place.regularOpeningHours?.openNow ?? null,
       maps_url: place.googleMapsUri || (place.id ? `https://www.google.com/maps/place/?q=place_id:${place.id}` : ''),
+      photo: photosById[place.id] || '',
       fsq_url: '',
       top_reviews: (reviewsById[place.id] || []).slice(0, 2)
     }
@@ -171,7 +172,7 @@ const SEARCH_FIELDS = [
   'places.userRatingCount', 'places.priceLevel', 'places.priceRange', 'places.types', 'places.primaryType',
   'places.location', 'places.googleMapsUri', 'places.goodForGroups', 'places.reservable',
   'places.servesDinner', 'places.dineIn', 'places.businessStatus',
-  'places.regularOpeningHours', 'places.currentOpeningHours'
+  'places.regularOpeningHours', 'places.currentOpeningHours', 'places.photos'
 ].join(',')
 const sleep = ms => new Promise(r => setTimeout(r, ms))
 
@@ -202,6 +203,17 @@ async function getReviews(apiKey, id) {
     text: (rv.text?.text || '').slice(0, 280)
   }))
 }
+async function getPhotoUri(apiKey, photoName) {
+  try {
+    const res = await fetch(`https://places.googleapis.com/v1/${photoName}/media?maxHeightPx=480&skipHttpRedirect=true`, {
+      headers: { 'X-Goog-Api-Key': apiKey }
+    })
+    const data = await res.json()
+    if (!res.ok) return ''
+    return data.photoUri || ''  // URL ถาวรฝั่ง googleusercontent — ไม่มี API key ติดไป
+  } catch { return '' }
+}
+
 export async function fetchFromGoogle(apiKey) {
   const rawPlaces = []
   for (const area of AREAS) {
@@ -215,13 +227,17 @@ export async function fetchFromGoogle(apiKey) {
   const uniq = new Map()
   for (const { place } of rawPlaces) if (place?.id && !uniq.has(place.id)) uniq.set(place.id, place)
   const top = [...uniq.values()].sort((a, b) => (b.rating || 0) - (a.rating || 0)).slice(0, 30)
-  const reviewsById = {}, reviewsFlat = []
+  const reviewsById = {}, reviewsFlat = [], photosById = {}
   for (const p of top) {
     const rv = await getReviews(apiKey, p.id)
     if (rv.length) { reviewsById[p.id] = rv; reviewsFlat.push({ place_id: p.id, reviews: rv }) }
+    if (p.photos && p.photos.length) {
+      const uri = await getPhotoUri(apiKey, p.photos[0].name)
+      if (uri) photosById[p.id] = uri
+    }
     await sleep(150)
   }
-  return { rawPlaces, reviewsById, reviewsFlat }
+  return { rawPlaces, reviewsById, reviewsFlat, photosById }
 }
 
 // ===== Foursquare Places API (New) — 2nd source for price/validation =====
@@ -255,9 +271,9 @@ export async function fetchFoursquare(apiKey) {
 }
 
 export async function buildPayload(googleKey, fsqKey) {
-  const { rawPlaces, reviewsById, reviewsFlat } = await fetchFromGoogle(googleKey)
+  const { rawPlaces, reviewsById, reviewsFlat, photosById } = await fetchFromGoogle(googleKey)
   const fsqList = await fetchFoursquare(fsqKey)
-  const restaurants = cleanAndScore(rawPlaces, reviewsById, fsqList)
+  const restaurants = cleanAndScore(rawPlaces, reviewsById, fsqList, photosById)
   const fsqMatched = restaurants.filter(r => r.fsq_url).length
   const now = new Date().toISOString()
   const sources = [

@@ -255,6 +255,8 @@ button.primary { background: var(--brand); color: #fff7e6; }
 .rec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 16px; }
 .rec-card { background: var(--panel); border: 3px solid var(--ink-border); box-shadow: var(--shadow); padding: 16px; position: relative; }
 .rec-card.gold { border-color: #c98a1e; box-shadow: 4px 4px 0 #c98a1e; }
+.rec-photo { width: 100%; height: 150px; object-fit: cover; border: 2.5px solid var(--ink-border); margin-bottom: 12px; display: block; background: var(--panel-2); }
+.row-photo { max-width: 230px; max-height: 150px; object-fit: cover; border: 2.5px solid var(--ink-border); box-shadow: var(--shadow-sm); display: block; margin-top: 8px; }
 .rec-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 8px; }
 .rec-rank { width: 34px; height: 34px; display: grid; place-items: center; background: var(--brand); color: #fff7e6; border: 2px solid var(--ink-border); font-family: 'Press Start 2P', monospace; font-size: 14px; }
 .rec-rank.r1 { background: #c98a1e; }

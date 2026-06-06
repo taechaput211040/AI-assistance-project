@@ -157,6 +157,7 @@ watchEffect(() => {
       <h3 style="margin:0 0 10px">🏆 แนะนำ Top 3 {{ area ? '· ' + area : '' }}</h3>
       <div class="rec-grid" style="margin-bottom:20px">
         <div v-for="(r,i) in top3" :key="r.id" class="rec-card" :class="{ gold: i === 0 }">
+          <img v-if="r.photo" :src="r.photo" :alt="r.name" class="rec-photo" loading="lazy" referrerpolicy="no-referrer" />
           <div class="rec-top">
             <div>
               <div class="rec-name">{{ r.name }}</div>
@@ -241,6 +242,7 @@ watchEffect(() => {
                           </div>
                         </div>
                         <div v-else class="muted-note">ไม่มีรีวิวที่ดึงมา</div>
+                        <img v-if="r.photo" :src="r.photo" :alt="r.name" class="row-photo" loading="lazy" referrerpolicy="no-referrer" />
                         <div style="margin-top:8px" class="muted-note">ที่อยู่: {{ r.address }}</div>
                         <div v-if="r.price_source" class="muted-note">ราคา: {{ r.price_label }} <template v-if="r.price_range">({{ r.price_range }})</template> · จาก {{ r.price_source === 'foursquare' ? 'Foursquare' : 'Google' }}</div>
                         <div v-if="r.hours && r.hours.length" style="margin-top:8px">
