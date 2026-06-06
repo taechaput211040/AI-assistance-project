@@ -1,0 +1,11 @@
+# Nuxt / Nitro
+node_modules
+.nuxt
+.output
+.data
+dist
+.env
+.data
+*.log
+.DS_Store
+.vercel

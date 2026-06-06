@@ -1,0 +1,12 @@
+# junk / caches
+.npm-cache/
+node_modules/
+*.log
+.DS_Store
+
+# app local files (กันซ้ำกับ exam-app/.gitignore)
+exam-app/.env
+exam-app/.data/
+exam-app/.nuxt/
+exam-app/.output/
+exam-app/node_modules/

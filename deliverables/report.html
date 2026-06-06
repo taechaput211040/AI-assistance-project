@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8" />
+<title>Player Feedback Insight Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --ink:#1a2233; --muted:#5b6781; --line:#e3e8f0; --brand:#5b6cff; --neg:#e5484d; --neu:#d9a000; --pos:#17926b;
+         --p1:#e5484d; --p2:#e08a17; --p3:#7a869c; --bg:#f5f7fb; }
+  *{box-sizing:border-box}
+  body{ font-family:'IBM Plex Sans Thai',system-ui,sans-serif; color:var(--ink); margin:0; background:var(--bg); font-size:13.5px; line-height:1.55;}
+  .page{ max-width:880px; margin:0 auto; background:#fff; padding:34px 40px; }
+  h1{ font-size:24px; margin:0 0 2px;}
+  h2{ font-size:15.5px; margin:22px 0 9px; padding-bottom:5px; border-bottom:2px solid var(--brand); color:#27314a;}
+  .sub{ color:var(--muted); font-size:12px;}
+  .hero{ display:flex; justify-content:space-between; align-items:flex-end; border-bottom:3px solid var(--ink); padding-bottom:12px;}
+  .tag{ background:var(--brand); color:#fff; font-size:11px; padding:3px 9px; border-radius:6px; font-weight:600;}
+  .kpis{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:16px 0 4px;}
+  .kpi{ border:1px solid var(--line); border-radius:10px; padding:11px 13px; background:#fbfcfe;}
+  .kpi .l{ font-size:11px; color:var(--muted);}
+  .kpi .v{ font-size:23px; font-weight:700; line-height:1.2;}
+  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  table{ width:100%; border-collapse:collapse; font-size:12.5px;}
+  th,td{ text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); vertical-align:top;}
+  th{ background:#eef1f8; font-weight:600; font-size:11.5px;}
+  .b{ display:inline-block; padding:1px 7px; border-radius:20px; font-size:11px; font-weight:600; color:#fff;}
+  .neg{background:var(--neg)} .neu{background:var(--neu)} .pos{background:var(--pos)}
+  .p1{background:var(--p1)} .p2{background:var(--p2)} .p3{background:var(--p3)}
+  .bar{ height:8px; background:#eef1f8; border-radius:6px; overflow:hidden; min-width:60px;}
+  .bar>i{ display:block; height:100%;}
+  ul{ margin:6px 0; padding-left:18px;} li{ margin:3px 0;}
+  .risk{ background:#fff5f5; border:1px solid #f3c7c7; border-radius:10px; padding:12px 14px;}
+  .rec{ background:#f1f8f4; border:1px solid #c5e6d3; border-radius:10px; padding:12px 14px;}
+  .foot{ margin-top:22px; padding-top:10px; border-top:1px solid var(--line); color:var(--muted); font-size:11px;}
+  .mini{ color:var(--muted); font-size:11px;}
+  @media print{ body{background:#fff} .page{padding:0; max-width:none} h2{break-after:avoid} table{break-inside:auto} tr{break-inside:avoid} }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="hero">
+    <div>
+      <h1>Player Feedback Insight Report</h1>
+      <div class="sub">Mobile Gacha RPG · ช่วงข้อมูล 1–23 พ.ค. 2026 · feedback 300 รายการจาก 8 ช่องทาง</div>
+    </div>
+    <span class="tag">AI-classified</span>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi"><div class="l">รวม feedback</div><div class="v">300</div></div>
+    <div class="kpi"><div class="l">เชิงลบ</div><div class="v" style="color:var(--neg)">72%</div><div class="mini">217 รายการ</div></div>
+    <div class="kpi"><div class="l">เร่งด่วน P1</div><div class="v" style="color:var(--neg)">17</div><div class="mini">ต้องแก้ทันที</div></div>
+    <div class="kpi"><div class="l">เชิงบวก</div><div class="v" style="color:var(--pos)">7%</div><div class="mini">22 รายการ</div></div>
+  </div>
+
+  <h2>1. ภาพรวม (Executive Summary)</h2>
+  <p style="margin-top:4px">
+    เสียงผู้เล่นในรอบนี้ <b>เอนไปทางลบชัดเจน (72%)</b> โดยกระจุกที่ 4 ด้านหลัก คือ
+    <b>บาลานซ์เกม, บั๊ก/เสถียรภาพ, เศรษฐกิจในเกม และกาชา/การเติมเงิน</b> — ทั้งสี่หมวดนี้มีอัตราเชิงลบ 100%
+    มีรายการ <b>เร่งด่วน (P1) 17 รายการ</b> ซึ่งเกือบทั้งหมดเป็นปัญหาเสถียรภาพ (แลค/เด้ง/ค้าง/ของไม่เข้า) ที่ตกอยู่กับทีม Engineering
+    ฝั่งบวกมีน้อย (7%) แต่ชัดเจน: ผู้เล่นชอบ <b>UI ใหม่, ดีไซน์ตัวละคร, ธีม/มินิเกมของ event และการตอบเร็วของทีม community</b>
+  </p>
+
+  <h2>2. Top Issues (เรียงตาม impact)</h2>
+  <div class="sub" style="margin-bottom:6px">impact = จำนวนเสียง × ความรุนแรง (P1/P2/P3) × ความเป็นลบ</div>
+  <table>
+    <thead><tr><th>#</th><th>ปัญหา</th><th>หมวด</th><th>ทีม</th><th>เสียง</th><th>P1</th><th style="width:90px">impact</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>ด่านยากเกินไปสำหรับผู้เล่นใหม่</td><td>Gameplay/Balance</td><td>Game Design</td><td>12</td><td>—</td><td><div class="bar"><i class="p2" style="width:100%;background:var(--neg)"></i></div></td></tr>
+      <tr><td>2</td><td>แลค/เฟรมตกในด่านบอส (เล่นต่อไม่ได้)</td><td>Bug/Technical</td><td>Engineering</td><td>8</td><td>8</td><td><div class="bar"><i style="width:100%;background:var(--neg)"></i></div></td></tr>
+      <tr><td>3</td><td>อันดับ event แข่งขันหนัก ผู้เล่นทั่วไปสู้ยาก</td><td>Event</td><td>LiveOps</td><td>11</td><td>—</td><td><div class="bar"><i style="width:92%;background:var(--neg)"></i></div></td></tr>
+      <tr><td>4</td><td>auto battle เลือกสกิลแย่ แพ้ทั้งที่ power ถึง</td><td>Gameplay/Balance</td><td>Game Design</td><td>10</td><td>—</td><td><div class="bar"><i style="width:83%;background:var(--neg)"></i></div></td></tr>
+      <tr><td>5</td><td>PvP meta แคบ / บางทีมชนะง่ายเกิน</td><td>Gameplay/Balance</td><td>Game Design</td><td>10</td><td>—</td><td><div class="bar"><i style="width:83%;background:var(--neg)"></i></div></td></tr>
+      <tr><td>6</td><td>บอสใหม่ one-shot บ่อย รู้สึกไม่แฟร์</td><td>Gameplay/Balance</td><td>Game Design</td><td>9</td><td>—</td><td><div class="bar"><i style="width:75%;background:var(--neg)"></i></div></td></tr>
+      <tr><td>7</td><td>เสียงเอฟเฟกต์หายหลังจบต่อสู้ ต้อง restart</td><td>Bug/Technical</td><td>Engineering</td><td>9</td><td>—</td><td><div class="bar"><i style="width:75%;background:var(--neg)"></i></div></td></tr>
+      <tr><td>8</td><td>วัสดุปลุกพลังหายาก ฟาร์มทั้งวันไม่พอ</td><td>Reward/Economy</td><td>Economy</td><td>8</td><td>—</td><td><div class="bar"><i style="width:67%;background:var(--neg)"></i></div></td></tr>
+    </tbody>
+  </table>
+
+  <h2>3. Patterns ที่พบ</h2>
+  <ul>
+    <li><b>ปัญหารวมศูนย์ที่ "ความแฟร์" ของเกม</b> — Gameplay/Balance เป็นหมวดใหญ่สุด (63 เสียง) ครอบคลุมบอส one-shot, ตัว arena แรงเกิน, auto-battle และ meta แคบ ผู้เล่นรู้สึกว่าผลแพ้-ชนะไม่ขึ้นกับฝีมือ</li>
+    <li><b>เสถียรภาพคือชนวน P1</b> — P1 เกือบทั้งหมด (16/17) คือบั๊ก performance ที่ Engineering ต้องรับ และเกิดถี่ตอนเล่น "ด่านบอสใหม่"</li>
+    <li><b>แรงเสียดทานเรื่องเงิน/เวลา</b> — กาชา (pity ไม่ชัด, banner ถี่, แพ็กแพง) + เศรษฐกิจ (ของหายาก, รางวัลน้อย) เสริมกันเป็นความรู้สึก "ต้องเติมถึงจะตามทัน / pay-to-win"</li>
+    <li><b>มือใหม่เจ็บหนัก</b> — "ด่านยากสำหรับคนเล่นไม่ถึงเดือน" + "tutorial เร็วไป" ชี้ปัญหา onboarding ที่กระทบ retention ผู้เล่นใหม่</li>
+    <li><b>กระจายทุก segment/platform/version</b> — ปัญหาหลักไม่ผูกกับกลุ่มใดกลุ่มเดียว (เสียงมาจากทั้ง F2P ถึง Whale, ทั้ง iOS/Android/PC) แปลว่าเป็นปัญหาเชิงระบบ ไม่ใช่เคสเฉพาะ</li>
+  </ul>
+
+  <h2>4. Risk ถ้าไม่แก้</h2>
+  <div class="risk">
+    <ul style="margin:0">
+      <li><b>Retention มือใหม่ตก</b> — onboarding ยาก + ด่านโหดช่วงต้น ทำให้ผู้เล่นใหม่หลุดก่อนถึงจุดที่ติดเกม</li>
+      <li><b>เสี่ยงรีวิวลบ & รายได้</b> — เสียงจาก App/Play Store Review (84 รายการ) ส่วนใหญ่ลบ กระทบเรตติ้งสโตร์และยอดติดตั้งใหม่; ภาพ pay-to-win กดความเต็มใจจ่ายของ mid/light spender</li>
+      <li><b>เสถียรภาพ = ความน่าเชื่อถือ</b> — แลค/เด้ง/ของไม่เข้าในจังหวะสำคัญ (บอส, รับรางวัล) บั่นทอนความไว้ใจ และเพิ่มภาระ support</li>
+      <li><b>ความรู้สึก "ไม่แฟร์" ใน PvP/บอส</b> — ผลักผู้เล่นสายแข่งขันออก ซึ่งมักเป็นกลุ่ม active/จ่ายสูง</li>
+    </ul>
+  </div>
+
+  <h2>5. Recommended Action</h2>
+  <div class="grid2">
+    <div class="risk">
+      <b style="color:var(--neg)">แก้ทันที (P1 — สัปดาห์นี้)</b>
+      <ul>
+        <li><b>Engineering:</b> hotfix แลค/เฟรมตกในด่านบอส และอาการเด้ง/ค้างตอนเปลี่ยนแผนที่ + เคส "ของไม่เข้า inventory"</li>
+        <li><b>Engineering:</b> แก้ล็อกอิน Facebook ที่ใช้ไม่ได้ + เพิ่ม crash logging เพื่อจับต้นตอ</li>
+        <li><b>Player Support:</b> เคลียร์คิว support ค้าง ตั้ง SLA ตอบ ≤ 24 ชม.</li>
+      </ul>
+    </div>
+    <div class="rec">
+      <b style="color:var(--pos)">วางแผน (P2/P3 — รอบหน้า)</b>
+      <ul>
+        <li><b>Game Design:</b> รีบาลานซ์บอส one-shot/ตัว arena/ตัวฮีล, แก้ AI auto-battle, ปรับเส้นความยากมือใหม่</li>
+        <li><b>Monetization:</b> ทำหน้า pity/อัตราดรอปให้โปร่งใส, ทบทวนความถี่ banner & ราคาแพ็ก ลดภาพ pay-to-win</li>
+        <li><b>Economy:</b> เพิ่ม drop วัสดุปลุกพลัง/ทอง, ทบทวนคุณค่ารางวัล login/รายวัน</li>
+        <li><b>LiveOps:</b> ลด grind, แยก stamina ของ event, ยืดเวลา, เพิ่มปฏิทินล่วงหน้า</li>
+        <li><b>Product/UX:</b> ทำ tutorial ให้ข้ามได้, แก้ปุ่มย้อนกลับ, เพิ่มตัวกรอง inventory</li>
+        <li><b>Community:</b> ขยายผลสิ่งที่ผู้เล่นชม (UI ใหม่, ดีไซน์, ธีม event) ในการสื่อสาร</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>6. ภาระงานตามทีม (ใครต้องรับผิดชอบ)</h2>
+  <table>
+    <thead><tr><th>ทีม (Owner)</th><th>จำนวน</th><th>เชิงลบ</th><th>P1</th><th>โฟกัสหลัก</th></tr></thead>
+    <tbody>
+      <tr><td>Game Design</td><td>77</td><td>82%</td><td>—</td><td>บาลานซ์บอส/PvP/auto-battle/ความยาก</td></tr>
+      <tr><td>Product/UX</td><td>53</td><td>53%</td><td>—</td><td>onboarding, เมนู, ตัวกรอง, คำขอ QoL</td></tr>
+      <tr><td>LiveOps</td><td>42</td><td>52%</td><td>—</td><td>event grind/เวลา/อันดับ/ปฏิทิน</td></tr>
+      <tr><td>Engineering</td><td>39</td><td>100%</td><td>16</td><td>เสถียรภาพ/บั๊ก (เร่งด่วนสุด)</td></tr>
+      <tr><td>Monetization</td><td>32</td><td>100%</td><td>—</td><td>กาชา/pity/ราคาแพ็ก/pay-to-win</td></tr>
+      <tr><td>Economy</td><td>32</td><td>100%</td><td>—</td><td>ทรัพยากร/รางวัล/ความคุ้ม</td></tr>
+      <tr><td>Community</td><td>22</td><td>0%</td><td>—</td><td>คำชม → ขยายผลการตลาด</td></tr>
+      <tr><td>Player Support</td><td>3</td><td>33%</td><td>1</td><td>บัญชี/เติมเงิน</td></tr>
+    </tbody>
+  </table>
+
+  <div class="foot">
+    วิธีวิเคราะห์: จัดหมวดด้วย AI (Claude) — Sentiment/Category/Priority/Owner ครบ 300 รายการ แล้วสรุปจากข้อมูลที่ aggregate ·
+    ดูรายละเอียดใน Prompt Log, Workflow และ Validation · Dashboard เชิงโต้ตอบดูได้ที่เว็บแอป (Nuxt/Vercel) ·
+    พิมพ์เป็น PDF: Ctrl/Cmd+P → Save as PDF
+  </div>
+</div>
+</body>
+</html>

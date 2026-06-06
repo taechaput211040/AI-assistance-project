@@ -1,0 +1,21 @@
+{
+  "name": "game-insight-suite",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev --port 5000",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview --port 5000",
+    "postinstall": "nuxt prepare",
+    "db:seed": "node scripts/db-seed.mjs",
+    "fetch:restaurants": "node scripts/fetch-restaurants.mjs"
+  },
+  "dependencies": {
+    "@libsql/client": "^0.14.0",
+    "chart.js": "^4.4.3",
+    "nuxt": "^3.13.0",
+    "vue": "^3.4.0",
+    "vue-router": "^4.3.0"
+  }
+}
